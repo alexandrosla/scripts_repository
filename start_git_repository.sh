@@ -1,5 +1,30 @@
 #!/bin/bash
-echo "Creating new GitLab Repository $repository..."
+echo "Clone-Commit-Push GIT Repository..."
+
+# choose git repository
+echo -e "choose repository management service: \n 1. GitLab (1) \n 2. GitHub (2) \n 3. Bitbucket (3)" 
+
+while :
+do
+  read selectionVCS
+  case $selectionVCS in
+	1)
+		vcs="https://gitlab.com"
+		break
+		;;
+	2)
+		vcs="https://github.com"
+		break
+		;;
+	3)
+		vcs="https://bitbucket.org"
+		break
+		;;
+	*)
+		echo "Please make a valid selection (1-3)"
+		;;
+  esac
+done
 
 # read variables
 echo -n "username: " 
@@ -18,7 +43,7 @@ then
 	read gitignore
 fi
 
-git clone https://gitlab.com/$username/$repository.git
+git clone $vcs/$username/$repository.git
 cd $repository
 
 # readme file
